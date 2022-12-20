@@ -1,0 +1,15 @@
+D:\Applications\Visual Studio\Projects\MyFristApp\bin\Debug\net6.0\MyFristApp.exe
+D:\Applications\Visual Studio\Projects\MyFristApp\bin\Debug\net6.0\MyFristApp.deps.json
+D:\Applications\Visual Studio\Projects\MyFristApp\bin\Debug\net6.0\MyFristApp.runtimeconfig.json
+D:\Applications\Visual Studio\Projects\MyFristApp\bin\Debug\net6.0\MyFristApp.dll
+D:\Applications\Visual Studio\Projects\MyFristApp\bin\Debug\net6.0\MyFristApp.pdb
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.csproj.AssemblyReference.cache
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.AssemblyInfoInputs.cache
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.AssemblyInfo.cs
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.csproj.CoreCompileInputs.cache
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.dll
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\refint\MyFristApp.dll
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.pdb
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\MyFristApp.genruntimeconfig.cache
+D:\Applications\Visual Studio\Projects\MyFristApp\obj\Debug\net6.0\ref\MyFristApp.dll
