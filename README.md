@@ -10,3 +10,8 @@ We will cover topics such as setting up a testing environment, writing test case
 Each tutorial is self-contained and includes a brief explanation of the topic, along with examples and exercises to help you practice what you have learned. We recommend completing the tutorials in order, as each lesson builds upon the concepts introduced in the previous ones.
 
 We hope you find this tutorial series helpful in your journey to becoming proficient in automatic testing for C#/.NET projects. Good luck and happy testing!
+
+TOTO List:
+1. video of auto testing in C#
+2. API in C#
+3. video of React
