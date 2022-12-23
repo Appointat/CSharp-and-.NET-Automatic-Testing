@@ -1,4 +1,4 @@
-# C#/.NET-Automatic-Testing
+# Automatic Testing in C#/.NET
 
 
 Welcome to our **C#/.NET automatic testing tutorial series for beginners**! This project is designed to provide a comprehensive and easy-to-follow guide for learning how to use automatic testing tools in C#/.NET projects.
