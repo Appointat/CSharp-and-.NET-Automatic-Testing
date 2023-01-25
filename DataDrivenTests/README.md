@@ -104,10 +104,48 @@ In a multifile assembly, there would still be only one assembly manifest in a DL
 
 ## DataDrivenTestFixture.cs
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c78c587-dc17-4438-89f2-7b2cc19f4458/Untitled.png)
+```csharp
+using NUnit.Framework;
+
+namespace DataDrivenTests
+{
+    [TestFixture(10)]
+    [TestFixture(42)]
+    public class DataDrivenTestFixture
+    {
+        int _x;
+
+        public DataDrivenTestFixture(int x)
+        {
+            _x = x;
+        }
+
+        [Test]
+        public void TestArguments()
+        {
+            Assert.Pass($"X is {_x}");
+        }
+    }
+}
+```
 
 ## GenericTestFixture.cs
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f46d7cfa-9450-4265-ab29-0f655eb6d84f/Untitled.png)
+```csharp
+using NUnit.Framework;
 
+namespace DataDrivenTests
+{
+    [TestFixture(typeof(int))]
+    [TestFixture(typeof(string))]
+    public class GenericTestFixture<T>
+    {
+        [Test]
+        public void TestType()
+        {
+            Assert.Pass($"The generic test type is {typeof(T)}");
+        }
+    }
+}
+```
 - keyword `[test]` is important.
