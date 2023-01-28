@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Applications\\Visual Studio\\Projects\\MyFristApp\\MyFristApp.csproj",
+      "projectUniqueName": "C:\\Users\\Appointat Chen\\Desktop\\GitHub-Course\\CSharp-and-.NET-Automatic-Testing\\MyFirstApp\\MyFristApp.csproj",
       "projectName": "MyFristApp",
-      "projectPath": "D:\\Applications\\Visual Studio\\Projects\\MyFristApp\\MyFristApp.csproj",
+      "projectPath": "C:\\Users\\Appointat Chen\\Desktop\\GitHub-Course\\CSharp-and-.NET-Automatic-Testing\\MyFirstApp\\MyFristApp.csproj",
       "packagesPath": "C:\\Users\\Appointat Chen\\.nuget\\packages\\",
-      "outputPath": "D:\\Applications\\Visual Studio\\Projects\\MyFristApp\\obj\\",
+      "outputPath": "C:\\Users\\Appointat Chen\\Desktop\\GitHub-Course\\CSharp-and-.NET-Automatic-Testing\\MyFirstApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Appointat Chen\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
