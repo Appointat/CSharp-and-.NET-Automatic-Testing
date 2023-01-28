@@ -6,9 +6,82 @@
 
 [Youtube Video 20:13](https://www.youtube.com/watch?v=q_F4PyW8GTg)
 
-### Encapsulation
+## Parameter Modifiers of Functions 参数修饰符
 
-- In the C#, A class is a blueprint for an object, and defines the properties and behaviors that the object will have. **Access modifiers**访问修饰符, such as **private, protected, internal, and public**, are used to control the accessibility of class members, and determine which code can access a particular property or method of the class.
+| Parameter Modifier | Passed By | Explicitly Assigned Before | Variables Changed Within |
+| --- | --- | --- | --- |
+| None | Value | Going In | Yes |
+| ref | Reference | Going out | Yes |
+| out | Reference | Going out | Yes |
+| in | Reference | Going in | No |
+| params | Reference | Going out | Yes |
+
+### 参数修饰符types
+
+- `None` ：无修饰符，按值传递，因此被调用的方法收到原始数据的一份副本coyp of the original value
+- `out`：输出参数由被调用的方法复制（**引用传递reference**），**必须要在方法给参数赋值**。
+    
+    ```csharp
+    public void FuncOut(out string mss); // function declaration
+    ```
+    
+- `ref`：调用者赋初值，并且可以由被调用的方法  重新赋值（**引用传递**）。
+- `params`：（不常用）它允许将一组可变数量的参数作为单独的逻辑参数进行传递，方法只能有一个 `params` 修饰符，而且必须时方法的最后一个参数。
+- 
+
+### out和ref的区别
+
+- `out` 修饰的参数**必须在 `method` 内赋值**，而 `ref` **可以在方法中不赋值/修改**。
+- `out` 在传入参数的时候，如果参数是局部变量，可以不用赋值，因为 `out` 会出手（对其赋值）。这意味着，在传入参数时，可以直接定义一个类型而暂时先不赋值：
+    
+    ```csharp
+    using System;
+    using System.Collections;
+    using System.Dynamic;
+    
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //string message = "hi";
+            SendMessage(out string message);
+        }
+    
+        static public void SendMessage(**out string message**)
+        {
+            message = "Hello";
+            Console.WriteLine(message);
+        }
+    }
+    ```
+    
+- `ref` ，只有在实参**必须要有初始值才能调用** `ref` 修饰的参数。因为 `ref` 修饰的不一定会给它赋值。
+    
+    ```csharp
+    using System;
+    using System.Collections;
+    using System.Dynamic;
+    
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "hi";
+            SendMessage(ref message);
+        }
+    
+        static public void SendMessage(ref string message)
+        {
+            // message = "Hello"; // 可赋值 or 不赋值
+            Console.WriteLine(message);
+        }
+    }
+    ```
+    
+
+## Encapsulation
+
+- In the C#, A class is a blueprint for an object and defines the properties and behaviors that the object will have. **Access modifiers**访问修饰符, such as **private, protected, internal, and public**, are used to control the accessibility of class members, and determine which code can access a particular property or method of the class.
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e9d07845-c49d-4d39-b631-1d5869041933/Untitled.png)
 
@@ -264,12 +337,11 @@ Func<int, int, bool> Eaqul = x, y => x==y;
 Eaqul(1,2);
 ```
 
-### Action
+## Action
 
 ### async, await （处理异步lambda）
 
-例如，下面的 Windows 窗体示例包含一个调用和等待异步方法 `ExampleMethodAsync`
-的事件处理程序。
+例如，下面的 Windows 窗体示例包含一个调用和等待异步方法 `ExampleMethodAsync`的事件处理程序。
 
 ```csharp
 public partial class Form1 : Form
@@ -343,6 +415,8 @@ internal class Program
 
 - It is used to mark a class, interface, field, property, method, or event **as being visible only within the current assembly** (a unit of code that can be compiled and executed, the main function)
 - Overall, the internal keyword is primarily used to **control the accessibility** of classes and class members, and to help maintain the integrity and encapsulation of a class.
+
+## Array & List
 
 ### Jagged Array
 
