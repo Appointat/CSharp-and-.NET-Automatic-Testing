@@ -39,3 +39,19 @@ The **main benefits of gRPC** are:
 ## ****C# Tooling support for .proto files****
 
 gRPC uses a contract-first契约优先 approach to API development. Services and messages are defined in `.proto` files:
+
+```protobuf
+syntax = "proto3";
+
+service Greeter {
+	rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+	string name = 1;
+}
+
+message HelloReply {
+	string message = 1;
+}
+```
