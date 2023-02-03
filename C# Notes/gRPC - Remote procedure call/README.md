@@ -108,3 +108,29 @@ app.MapGrpcService<GreeterService>();
 ```
 
 To learn more about gRPC services on ASP.NET Core, see [gRPC services with ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/grpc/aspnetcore?view=aspnetcore-7.0).
+
+### Call gRPC services with a .NET client
+
+gRPC clients are concrete client types that are [generated from `.proto` files](https://learn.microsoft.com/en-us/aspnet/core/grpc/basics?view=aspnetcore-7.0#generated-c-assets). The concrete gRPC client has methods that translate to the gRPC service in the `.proto` file.
+
+```csharp
+var channel = GrpcChannel.ForAddresse("https://localhost:5001");
+var client = new Greeter.GreeterClient(channel);
+
+var response = await client.SayHelloAsync(
+	new HelloRequest { Name = "World" });
+
+Console.WriteLine(response.Message);
+```
+
+A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service. A channel can be created using `GrpcChannel.ForAddress`.
+
+For more information on creating clients, and calling different service methods, see [Call gRPC services with the .NET client](https://learn.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-7.0).
+
+### Additional resources
+
+- [gRPC services with C#](https://learn.microsoft.com/en-us/aspnet/core/grpc/basics?view=aspnetcore-7.0)
+- [gRPC services with ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/grpc/aspnetcore?view=aspnetcore-7.0)
+- [Call gRPC services with the .NET client](https://learn.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-7.0)
+- [gRPC client factory integration in .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/clientfactory?view=aspnetcore-7.0)
+- [Create a .NET Core gRPC client and server in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-7.0)
