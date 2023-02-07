@@ -36,7 +36,7 @@ The **main benefits of gRPC** are:
 - Polyglot systems where multiple languages are required for the development.
 - Point-to-point real-time services that need to handle streaming requests or responses.
 
-## ****C# Tooling support for .proto files****
+## ****C# Tooling support for `.proto` files****
 
 gRPC uses a contract-first契约优先 approach to API development. Services and messages are defined in `.proto` files:
 
