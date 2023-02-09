@@ -134,3 +134,284 @@ For more information on creating clients, and calling different service methods,
 - [Call gRPC services with the .NET client](https://learn.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-7.0)
 - [gRPC client factory integration in .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/clientfactory?view=aspnetcore-7.0)
 - [Create a .NET Core gRPC client and server in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-7.0)
+
+# Tutorial: Create a gRPC client and server in [ASP.NET](http://ASP.NET) Core
+
+## Summary
+
+- Prerequisites 先决条件
+- Create a gRPC service
+- Create the gRPC client in a .Net console app
+- Test the gRPC client with the gRPC Greater service
+
+This tutorial shows how to create a .NET Core [gRPC](https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-7.0) client and an ASP.NET Core gRPC Server. At the end, **you'll have a gRPC client that communicates with the gRPC Greeter service**.
+
+In this tutorial, you:
+
+- Create a gRPC Server.
+- Create a gRPC client.
+- Test the gRPC client with the gRPC Greeter service
+
+## Prerequisites
+
+| Visual Studio | Visual Studio Code | Visual Studio for Mac |
+| --- | --- | --- |
+| • https://visualstudio.microsoft.com/vs/#download with the ASP.NET and web development workload. | - Visual Studio Code
+- C# for Visual Studio Code (latest version)
+- .NET 6.0 SDK | • https://visualstudio.microsoft.com/vs/mac/preview/ |
+
+## Create a gRPC service
+
+- Visual Studio
+    - Start Visual Studio 2022 and select **Create a new project**.
+    - In the **Create a new project** dialog, search for `gRPC`. Select **ASP.NET Core gRPC Service** and select **Next**.
+    - In the **Configure your new project** dialog, enter `GrpcGreeter` for **Project name**. It's important to name the project *GrpcGreeter* so the namespaces match when you copy and paste code.
+    - Select **Next**.
+    - In the **Additional information** dialog, select **.NET 6.0 (Long-term support)** and then select **Create**.
+- Visual Studio Code
+    - The tutorial assumes familiarity with VS Code. For more information, see [Getting started with VS Code](https://code.visualstudio.com/docs)
+        - Open the [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal).
+        - Change to the directory (`cd`) that will contain the project.
+        - Run the following commands:
+            
+            ```csharp
+            dotnet new grpc -o GrpcGreeter
+            code -r GrpcGreeter
+            ```
+            
+            - The `dotnet new` command creates a new gRPC service in the *GrpcGreeter* folder.
+            - The `code` command opens the *GrpcGreeter* folder in a new instance of Visual Studio Code.
+- Visual Studio for Mac
+    - Start Visual Studio for Mac and select **File** > **New Project**.
+    - In the **Choose a template for your new project** dialog, select **Web and Console** > **App** > **gRPC Service** and select **Continue**.
+    - Select **.NET 6.0** for the target framework and select **Continue**.
+    - Name the project **GrpcGreeter**. It's important to name the project *GrpcGreeter* so the namespaces match when you copy and paste code.
+    - Select **Continue**.
+
+### Run the service (Visual Studio)
+
+- Press Ctrl+F5 to run without the debugger.
+    
+    Visual Studio displays the following dialog when a project is not yet configured to use SSL:
+    
+    ![trustcert.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/61b53810-717b-4e41-97ed-a5e22699d6fe/trustcert.png)
+    
+- Select **Yes** if you trust the IIS Express SSL certificate.
+    
+    The following dialog is displayed: 
+    
+    ![cert.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1f9da507-f009-4eaf-bb3d-2de5629f7dbc/cert.png)
+    
+    Select **Yes** if you agree to trust the development certificate.
+    
+    For information on trusting the Firefox browser, see [Firefox SEC_ERROR_INADEQUATE_KEY_USAGE certificate error](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-7.0#trust-ff).
+    
+    Visual Studio:
+    
+    - Starts [Kestrel](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/?view=aspnetcore-7.0#kestrel) server.
+    - Launches a browser.
+    - Navigates to `http://localhost:port`, such as `http://localhost:7042`.
+        - *port*: A randomly assigned port number for the app.
+        - `localhost`: The standard hostname for the local computer. Localhost only serves web requests from the local computer.
+
+The logs show the service listening on `https://localhost:<port>`, where `<port>` is the localhost port number randomly assigned when the project is created and set in `Properties/launchSettings.json`.
+
+```powershell
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://localhost:<port>
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+```
+
+> 🗒️ Note
+> 
+> 
+> The gRPC template is configured to use **[Transport Layer Security (TLS)](https://tools.ietf.org/html/rfc5246)**. gRPC clients need to use HTTPS to call the server. The gRPC service localhost port number is randomly assigned when the project is created and set in the *Properties\launchSettings.json* file of the gRPC service project.
+> 
+> macOS doesn't support ASP.NET Core gRPC with TLS. Additional configuration is required to successfully run gRPC services on macOS. For more information, see **[Unable to start ASP.NET Core gRPC app on macOS](https://learn.microsoft.com/en-us/aspnet/core/grpc/troubleshoot?view=aspnetcore-7.0#unable-to-start-aspnet-core-grpc-app-on-macos)**.
+> 
+
+### Examine the project files
+
+*GrpcGreeter* project files:
+
+- `Protos/greet.proto`: defines the `Greeter` gRPC and is used to generate the gRPC server assets. For more information0, see [Introduction to gRPC](https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-7.0).
+- `Services` folder: Contains the implementation of the `Greeter` service.
+- `appSettings.json`: Contains configuration data such as the protocol used by Kestrel. For more information, see [Configuration in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-7.0).
+- `Program.cs`, which contains:
+    - The entry point for the gRPC service. For more information, see [.NET Generic Host in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-7.0).
+    - Code that configures app behavior. For more information, see [App startup](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/startup?view=aspnetcore-7.0).
+
+## Create the gRPC client in a .NET console app (Visual Studio)
+
+- Open a second instance of Visual Studio and select **Create a new project**.
+- In the **Create a new project** dialog, select **Console Application**, and select **Next**.
+- In the **Project name** text box, enter **GrpcGreeterClient** and select **Next**.
+- In the **Additional information** dialog, select **.NET 6.0 (Long-term support)** and then select **Create**.
+
+### Add required NuGet packages (Visual Studio)
+
+The gRPC client project requires the following NuGet packages:
+
+- [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client), which contains the .NET Core client.
+- [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/), which contains protobuf message APIs for C#.
+- [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/), which contain C# tooling support for protobuf files. The tooling package isn't required at runtime, so the dependency is marked with `PrivateAssets="All"`.
+
+Install the packages using either the Package Manager Console (PMC) or Manage NuGet Packages.
+
+### PMC option to install packages
+
+- From Visual Studio, select **Tools** > **NuGet Package Manager** > **Package Manager Console**
+- From the **Package Manager Console** window, run `cd GrpcGreeterClient` to change directories to the folder containing the `GrpcGreeterClient.csproj` files.
+- Run the following commands:
+    
+    ```powershell
+    Install-Package Grpc.Net.Client
+    Install-Package Google.Protobuf
+    Install-Package Grpc.Tools
+    ```
+    
+
+### Manage NuGet Packages option to install packages
+
+- Right-click the project in **Solution Explorer** > **Manage NuGet Packages**.
+- Select the **Browse** tab.
+- Enter **Grpc.Net.Client** in the search box.
+- Select the **Grpc.Net.Client** package from the **Browse** tab and select **Install**.
+- Repeat for `Google.Protobuf` and `Grpc.Tools`.
+
+### Add greet.proto
+
+- Create a ********Protos******** folder in the gRPC client project.
+- Copy the *****Protos\greet.proto***** file from the gRPC Greeter service to the ***Protos*** folder in the gRPC client project.
+- Update the namespace inside the `greet.proto` file to the project’s namespaces:
+    
+    ```powershell
+    option csharp_namespace = "GrpcGreetrClient";
+    ```
+    
+- Edit the `GrpcGreeterClient.csproj` project file:
+    
+    Right-click the project and select **Edit Project File**.
+    
+    - Add an item group with a `<Protobuf>` element that refers to the *greet.proto* file, then add a `<Protobuf>` element to the existing `<ItemGroup>` in the project file:
+        
+        ```xml
+        <ItemGroup>
+            <Protobuf Include="Protos\\greet.proto" GrpcService="Client" />
+        </ItemGroup>
+        ```
+        
+    - Add a `<PackageReference>` element to the existing `<ItemGroup>` in the project file:
+        
+        ```xml
+        <ItemGroup>
+            <PackageReference Include="Grpc.Tools" Version="2.30.0" PrivateAssets="All" />
+        </ItemGroup>
+        ```
+        
+
+### Create the Greeter client
+
+- Build the client project to create the types in the `GrpcGreeterClient`  namespace.
+- Create a `Program.cs` file in the `GrpcGreeterClient` project.
+- Add the following code to the `GreeterClient.cs` file:
+
+```csharp
+using System.Threading.Tasks;
+using Grpc.Net.Client;
+using GrpcGreeterClient;
+
+// The port number must match the port of the gRPC server.
+using var channel = GrpcChannel.ForAddress("https://localhost:7042");
+var client = new Greeter.GreeterClient(channel);
+var reply = await client.SayHelloAsync(
+	new HelloRequest { Name = "GreeterClient" });
+Console.WriteLine("Greeting: " + reply.Message);
+Console.WriteLine("Press any key to exit...");
+COnsole.ReadKey();
+```
+
+- In the preceding highlighted code, replace the localhost port number `7042` with the `HTTPS` port number specified in `Properties/launchSettings.json` within the `GrpcGreeter` service project.
+
+`Program.cs` contains the entry point and logic for the gRPC client.
+
+The Greeter client is created by:
+
+- Instantiating a `GrpcChannel` containing the information for creating the connection to the gRPC service.
+- Using the `GrpcChannel` to construct the Greeter client:
+    
+    ```csharp
+    // The port number must match the port of the gRPC server.
+    using var channel = GrpcChannel.ForAddress("https://localhost:7042");
+    var client = new Greeter.GreeterClient(channel);
+    var reply = await client.SayHelloAsync(
+                      new HelloRequest { Name = "GreeterClient" });
+    Console.WriteLine("Greeting: " + reply.Message);
+    Console.WriteLine("Press any key to exit...");
+    Console.ReadKey();
+    ```
+    
+
+The Greeter client calls the asynchronous `SayHello` method. The result of the `SayHello` call is displayed:
+
+```csharp
+// The port number must match the port of the gRPC server.
+using var channel = GrpcChannel.ForAddress("https://localhost:7042");
+var client = new Greeter.GreeterClient(channel);
+var reply = await client.SayHelloAsync(
+                  new HelloRequest { Name = "GreeterClient" });
+Console.WriteLine("Greeting: " + reply.Message);
+Console.WriteLine("Press any key to exit...");
+Console.ReadKey();
+```
+
+## Test the gRPC client with the gRPC Greater service (Visual Studio)
+
+- In the Greeter service, press `Ctrl+F5` to start the server without the debugger.
+- In the `GrpcGreeterClient` project, press `Ctrl+F5` to start the client without the debugger.
+
+The client sends a greeting to the service with a message containing its name, *GreeterClient*
+. The service sends the message "Hello GreeterClient" as a response. The "Hello GreeterClient" response is displayed in the command prompt:
+
+```
+Greeting: Hello GreeterClient
+Press any key to exit...
+```
+
+The gRPC service records the details of the successful call in the logs written to the command prompt:
+
+```
+info: Microsoft.Hosting.Lifetime[0]
+      Now listening on: https://localhost:<port>
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\GH\aspnet\docs\4\Docs\aspnetcore\tutorials\grpc\grpc-start\sample\GrpcGreeter
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/2 POST https://localhost:<port>/Greet.Greeter/SayHello application/grpc
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'gRPC - /Greet.Greeter/SayHello'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'gRPC - /Greet.Greeter/SayHello'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished in 78.32260000000001ms 200 application/grpc
+```
+
+Update the `appsettings.Development.json` file by adding the following lines:
+
+```
+"Microsoft.AspNetCore.Hosting": "Information",
+"Microsoft.AspNetCore.Routing.EndpointMiddleware": "Information"
+```
+
+# ****Next steps****
+
+- View or download [the completed sample code for this tutorial](https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/tutorials/grpc/grpc-start/sample6) ([how to download](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core?view=aspnetcore-7.0#how-to-download-a-sample)).
+- [Overview for gRPC on .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-7.0)
+- [gRPC services with C#](https://learn.microsoft.com/en-us/aspnet/core/grpc/basics?view=aspnetcore-7.0)
+- [Migrate gRPC from C-core to gRPC for .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/migration?view=aspnetcore-7.0)
