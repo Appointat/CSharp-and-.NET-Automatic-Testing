@@ -36,7 +36,7 @@ The **main benefits of gRPC** are:
 - Polyglot systems where multiple languages are required for the development.
 - Point-to-point real-time services that need to handle streaming requests or responses.
 
-## ****C# Tooling support for .proto files****
+## ****C# Tooling support for `.proto` files****
 
 gRPC uses a contract-first契约优先 approach to API development. Services and messages are defined in `.proto` files:
 
@@ -134,6 +134,7 @@ For more information on creating clients, and calling different service methods,
 - [Call gRPC services with the .NET client](https://learn.microsoft.com/en-us/aspnet/core/grpc/client?view=aspnetcore-7.0)
 - [gRPC client factory integration in .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/clientfactory?view=aspnetcore-7.0)
 - [Create a .NET Core gRPC client and server in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-7.0)
+<<<<<<< HEAD
 
 # Tutorial: Create a gRPC client and server in [ASP.NET](http://ASP.NET) Core
 
@@ -415,3 +416,5 @@ Update the `appsettings.Development.json` file by adding the following lines:
 - [Overview for gRPC on .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-7.0)
 - [gRPC services with C#](https://learn.microsoft.com/en-us/aspnet/core/grpc/basics?view=aspnetcore-7.0)
 - [Migrate gRPC from C-core to gRPC for .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/migration?view=aspnetcore-7.0)
+=======
+>>>>>>> 153d2b030e46c1e183e2e03b6f8b378458fd12ab
