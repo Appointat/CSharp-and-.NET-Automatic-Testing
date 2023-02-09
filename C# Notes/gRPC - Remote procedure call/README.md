@@ -416,5 +416,3 @@ Update the `appsettings.Development.json` file by adding the following lines:
 - [Overview for gRPC on .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/?view=aspnetcore-7.0)
 - [gRPC services with C#](https://learn.microsoft.com/en-us/aspnet/core/grpc/basics?view=aspnetcore-7.0)
 - [Migrate gRPC from C-core to gRPC for .NET](https://learn.microsoft.com/en-us/aspnet/core/grpc/migration?view=aspnetcore-7.0)
-=======
->>>>>>> 153d2b030e46c1e183e2e03b6f8b378458fd12ab
