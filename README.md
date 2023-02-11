@@ -14,5 +14,5 @@ We hope you find this tutorial series helpful in your journey to becoming profic
 TODO List:
 1. Video of auto testing in C#
 2. API in C#
-3. video of React
+3. Video of React
 4. 
