@@ -12,7 +12,7 @@ Each tutorial is self-contained and includes a brief explanation of the topic, a
 We hope you find this tutorial series helpful in your journey to becoming proficient in automatic testing for C#/.NET projects. Good luck and happy testing!
 
 TODO List:
-1. video of auto testing in C#
+1. Video of auto testing in C#
 2. API in C#
 3. video of React
 4. 
