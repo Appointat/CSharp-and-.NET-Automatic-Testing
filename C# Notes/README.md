@@ -8,14 +8,6 @@
 
 ## Parameter Modifiers of Functions 参数修饰符
 
-| Parameter Modifier | Passed By | Explicitly Assigned Before | Variables Changed Within |
-| --- | --- | --- | --- |
-| None | Value | Going In | Yes |
-| ref | Reference | Going out | Yes |
-| out | Reference | Going out | Yes |
-| in | Reference | Going in | No |
-| params | Reference | Going out | Yes |
-
 ### 参数修饰符types
 
 - `None` ：无修饰符，按值传递，因此被调用的方法收到原始数据的一份副本coyp of the original value
@@ -333,8 +325,8 @@ namespace App
 > 
 
 ```csharp
-Func<int, int, bool> Eaqul = x, y => x==y;
-Eaqul(1,2);
+bool Eaqul = (int x, int y) => x==y;
+Eaqul(1,2); // return False
 ```
 
 ## Action
@@ -416,6 +408,84 @@ internal class Program
 - It is used to mark a class, interface, field, property, method, or event **as being visible only within the current assembly** (a unit of code that can be compiled and executed, the main function)
 - Overall, the internal keyword is primarily used to **control the accessibility** of classes and class members, and to help maintain the integrity and encapsulation of a class.
 
+## Keyword
+
+### `[Theory]` and `[Fact]` for unit test
+
+```csharp
+[Theory]
+[MemberData(nameof(AllImplementedInterfaces))]
+public void CanResolve(Type type)
+{
+  using var sut = new AssemblyScopedContainer(typeof(ILicenseManager).Assembly);
+  Assert.NotNull(sut.Resolve(type));
+}
+
+[Fact]
+public void TestFactoryCreatesComponent()
+{
+  using var sut = new AssemblyScopedContainer(typeof(ILicenseManager).Assembly);
+  Assert.NotNull(sut.Kernel.Resolve<ISensorFilePathHandlerFactory>()
+                    .Create(new FolderPath(Path.CreateDirectory(new DisposableTempFolder().FolderPath))));
+}
+
+public static IEnumerable<object[]> SensorCreationService_WhenAsked_CreateValidId_Data
+{
+    get
+    {
+        return Enum.GetValues<SensorTypeEnum>()
+                   .Except(new[]
+                    {
+                        SensorTypeEnum.ThermalCamera
+                    })
+                   .Select(sensorTypeEnum => new object[]
+                    {
+                        sensorTypeEnum,
+                        sensorTypeEnum.ToString()
+                    });
+    }
+}
+```
+
+In C#, the terms "Theory" and "Fact" typically refer to two different types of unit tests that are written to verify the behavior of code.
+
+- In xUnit, a "Theory" test is a test that is run multiple times with different input data.
+    - Purpose: to ensure that the code behaves correctly for a range of **different input values**.
+- A "Fact" test is a test that is run once, with a fixed set of input data.
+    - Purpose: to ensure that the code behaves correctly for a **specific input value**.
+
+### `sealed`for class
+
+```csharp
+public sealed class InstallerTests {}
+```
+
+The keyword **`sealed`** is used to indicate that a class or method **cannot be further derived or overridden** by any subclass.
+
+### `[MemberData]` for unit test
+
+The **`[MemberData]`** attribute can be used to provide test data for a parameterized unit test, The method must return an `IEnumerable<object[]>` in which each `object[]` contains the parameters for a single test invocation.
+
+- the name of provided test data
+- the type of test data
+
+```csharp
+public class MyClass
+{
+    [MemberData(nameof(GetData))]
+    public void MyMethod(int arg1, string arg2, MyType arg3) { /* ... */ }
+
+    public static IEnumerable<object[]> GetData()
+    {
+        yield return new object[] { 1, "foo", new MyType() };
+        yield return new object[] { 10, "bar", new MyType() };
+        yield return new object[] { 100, "baz", new MyType() };
+    }
+}
+```
+
+The method `MyMethod` is decorated with the attribute `[MemberData]` . The `[MemberData]` attribute takes the name of a method that provides the test data which, in this case, is the method `GetData`. The `GetData` method returns an `IEnumerable<object[]>` in which each `object[]` contains the parameters for a single test invocation. In this example, the `MyMethod` method takes three parameters, an `int`, a `string`, and an instance of a type named `MyType`. The `GetData` method provides three sets of data for those three parameters.
+
 ## Array & List
 
 ### Jagged Array
@@ -440,6 +510,32 @@ list.RemoveAt(1);
 ### NotImplementedException class
 
 - It is a class that is thrown to indicate that the method or operation being called **has not been implemented**. This can be useful when you are developing a class hierarchy and want to specify that certain methods must be implemented by derived classes.
+
+# Standard Function
+
+## typeof()
+
+### System.Type
+
+- The typeof operator is used to get the type of a variable, class, struct, or object instance.
+
+Syntax:
+
+```csharp
+string typeName = typeof(string).Name; // typeName == "String"
+```
+
+Example:
+
+```csharp
+int a = 10;
+Type t = typeof(int);
+Console.WriteLine(t); // Outputs System.Type can also be used with generic types. The example below uses the generic List type:
+
+List<int> myList = new List<int>();
+Type t = typeof(List<int>);
+Console.WriteLine(t); // OutputsThe typeof operator can also be used to get the type of a class, struct, or object instance:
+```
 
 ## Automatic Testing（[点此返回Ansys自动测试岗位业务问](https://www.notion.so/Eng-SDE-Ansys-Compressed-Sensing-951e248a9ea74734b5f668956de71375)）
 
