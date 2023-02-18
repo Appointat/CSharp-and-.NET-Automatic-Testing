@@ -428,23 +428,6 @@ public void TestFactoryCreatesComponent()
   Assert.NotNull(sut.Kernel.Resolve<ISensorFilePathHandlerFactory>()
                     .Create(new FolderPath(Path.CreateDirectory(new DisposableTempFolder().FolderPath))));
 }
-
-public static IEnumerable<object[]> SensorCreationService_WhenAsked_CreateValidId_Data
-{
-    get
-    {
-        return Enum.GetValues<SensorTypeEnum>()
-                   .Except(new[]
-                    {
-                        SensorTypeEnum.ThermalCamera
-                    })
-                   .Select(sensorTypeEnum => new object[]
-                    {
-                        sensorTypeEnum,
-                        sensorTypeEnum.ToString()
-                    });
-    }
-}
 ```
 
 In C#, the terms "Theory" and "Fact" typically refer to two different types of unit tests that are written to verify the behavior of code.
@@ -454,7 +437,7 @@ In C#, the terms "Theory" and "Fact" typically refer to two different types of u
 - A "Fact" test is a test that is run once, with a fixed set of input data.
     - Purpose: to ensure that the code behaves correctly for a **specific input value**.
 
-### `sealed`for class
+### `sealed` for class
 
 ```csharp
 public sealed class InstallerTests {}
@@ -484,7 +467,7 @@ public class MyClass
 }
 ```
 
-The method `MyMethod` is decorated with the attribute `[MemberData]` . The `[MemberData]` attribute takes the name of a method that provides the test data which, in this case, is the method `GetData`. The `GetData` method returns an `IEnumerable<object[]>` in which each `object[]` contains the parameters for a single test invocation. In this example, the `MyMethod` method takes three parameters, an `int`, a `string`, and an instance of a type named `MyType`. The `GetData` method provides three sets of data for those three parameters.
+The method `MyMethod` is decorated with the attribute `[MemberData]` . The `[MemberData]` attribute takes the name of a method that provides the test data which, in this case, is the method `GetData`. The `GetData` method returns an `IEnumerable<object[]>` in which **each `object[]` contains the parameters for a single test invocation**. In this example, the `MyMethod` method takes three parameters, an `int`, a `string`, and an instance of a type named `MyType`. The `GetData` method provides three sets of data for those three parameters.
 
 ## Array & List
 
