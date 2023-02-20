@@ -8,11 +8,14 @@ namespace NUnit.Framework
     /// <summary>
     /// A simple ExpectedExceptionAttribute
     /// </summary>
+    /// Heritage from NUnitAttribute and IWrapTestMethod
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class ExpectedExceptionAttribute : NUnitAttribute, IWrapTestMethod
     {
+        // atrribute
         private readonly Type _expectedExceptionType;
 
+        // Constructor
         public ExpectedExceptionAttribute(Type type)
         {
             _expectedExceptionType = type;
