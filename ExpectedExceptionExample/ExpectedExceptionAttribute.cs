@@ -48,17 +48,24 @@ namespace NUnit.Framework
                 {
                     if (ex is NUnitException)
                         ex = ex.InnerException;
-                    caughtType = ex.GetType();
+                    caughtType = ex.GetType(); // We can obtain a message by this way
                 }
 
+                // Detecting if it is the expected exception
                 if (caughtType == _expectedType)
+                {
                     context.CurrentResult.SetResult(ResultState.Success);
+                }
                 else if (caughtType != null)
+                {
                     context.CurrentResult.SetResult(ResultState.Failure,
-                        string.Format("Expected {0} but got {1}", _expectedType.Name, caughtType.Name));
+                        string.Format("Expected {0} but got {1}", _exceptionType.Name, caughtType.Name));
+                }
                 else
-                    context.CurrentResult.SetResult(ResultState.Failure,
-                        string.Format("Expected {0} but no exception was thrown", _expectedType.Name));
+                {
+                    context.CurrentResult.SetResult(ResulteState.Failure,
+                        string.Format("Expected {0} but no exception was throw", _expectedType.Name));
+                }
 
                 return context.CurrentResult;
             }
