@@ -30,3 +30,42 @@ So, developing an application driven by automated tests can provide many benefit
 3. Long-term value: even if you have to expend more effort up front to develop automated tests, you'll gain long-term dividends.
 4. Time back: the more the tests are run, the more time they save you.
 5. Energy back: the longer the lifecycle of a project, the more important automated tests become.
+
+# Example
+
+```csharp
+// Import the necessary libraries for unit testing
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+// Define a class for testing the Calculator class
+[TestClass]
+public class CalculatorTests
+{
+    // Define a test method for the Add functionality of the Calculator
+    [TestMethod]
+    public void Add_TwoNumbers_ReturnsSum()
+    {
+        // Arrange - set up the test by defining variables and expected results
+        int num1 = 5;
+        int num2 = 7;
+        int expectedSum = 12; // Define the expected result of adding num1 and num2
+
+        // Act - execute the code being tested
+        Calculator calculator = new Calculator(); // Create a new instance of the Calculator class
+        int actualSum = calculator.Add(num1, num2); // Call the Add method of the Calculator instance to get the actual result
+
+        // Assert - check that the expected result and actual result are the same
+        Assert.AreEqual(expectedSum, actualSum); // Compare the expected result with the actual result to ensure that the Add method is working correctly
+    }
+}
+
+// Define the Calculator class that contains the Add method
+public class Calculator
+{
+    // Add method adds two numbers and returns their sum
+    public int Add(int num1, int num2)
+    {
+        return num1 + num2;
+    }
+}
+```
