@@ -87,3 +87,71 @@ React is an open-source JavaScript library for building user interfaces, which i
 ## Definition Spectron
 
 Spectron is an open-source testing framework for **Electron applications**. It is built on top of the **popular testing framework**, WebDriverIO, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
+
+## How to use Spectron for automated tests
+
+1. Install Spectron as a dependency in your project. 
+2. Set up the test framework/test runner, such as Mocha, and an assertion library, such as Chai.
+3. Write your tests, using Spectron’s Application object, which represents your Electron app.
+    
+    ```jsx
+    const Application = require('spectron').Application;
+    const assert = require('assert');
+    const path = require('path');
+    
+    // Path to your Electron application's executable file
+    const appPath = path.join(__dirname, '..', 'dist', 'electron', 'MyApp.app', 'Contents', 'MacOS', 'MyApp');
+    
+    // Options object to configure Spectron Application instance
+    const appOptions = {
+      path: appPath
+    };
+    
+    // Initialize a new Spectron Application instance
+    const app = new Application(appOptions);
+    
+    // Wait for the application to be ready before running any tests
+    before(function () {
+      return app.start().then(function () {
+        return app.client.waitUntilWindowLoaded();
+      });
+    });
+    
+    // Close the application after all tests are finished
+    after(function () {
+      if (app && app.isRunning()) {
+        return app.stop();
+      }
+    });
+    
+    // Define a test suite using Mocha
+    describe('MyApp', function () {
+    
+      // Define a test case within the suite 套件（大括号之内的）
+      it('should display the correct window title', function () {
+        // Use Spectron's built-in `browserWindow` method to access the application's window
+        return app.client.browserWindow.getTitle().then(function (title) {
+          // Assert that the window title is correct
+          assert.strictEqual(title, 'MyApp');
+        });
+      });
+    
+      // Define another test case within the same suite
+      it('should display a button that can be clicked', function () {
+        // Use Spectron's built-in `element` and `click` methods to interact with the application's UI
+        return app.client.element('#my-button').click().then(function () {
+          // Use Spectron's built-in `isVisible` method to assert that the button was clicked and is now visible
+          return app.client.isVisible('#my-button');
+        }).then(function (isVisible) {
+          // Assert that the button is visible after being clicked
+          assert.strictEqual(isVisible, true);
+        });
+      });
+    
+    });
+    ```
+    
+    - 关于代码结构的总结：定义app的路径，configuration，在test之前要确保Spectron已经准备好了，在suite里定义test
+4. Run tests
+    1. `npm test`. This will execute the tests defined in the **`describe`** and **`it`** blocks in your test script.
+5. Debug and refine tests
