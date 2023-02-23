@@ -70,4 +70,14 @@ public class Calculator
 }
 ```
 
-Automated Tests for React application 针对React的自动化测试
+# Automated Tests for React application 针对React的自动化测试
+
+# Automated Tests for React Electron Application 基于React Electron的自动化测试
+
+## Definition Electron
+
+Electron is an open-source framework for building desktop applications using web technologies such as HTML, CSS, and JavaScript, which has since become a popular choice for building desktop applications across various industries.
+
+## Definition React
+
+React is an open-source JavaScript library for building user interfaces, which is now widely used by developers to build single-page applications, mobile applications, and complex web applications. React uses a **component-based architecture基于组件架构,** which means that developers can build complex user interfaces by composing smaller, reusable components.
