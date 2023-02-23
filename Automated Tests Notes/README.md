@@ -69,3 +69,5 @@ public class Calculator
     }
 }
 ```
+
+Automated Tests for React application 针对React的自动化测试
