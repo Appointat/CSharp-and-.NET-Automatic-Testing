@@ -81,3 +81,9 @@ Electron is an open-source framework for building desktop applications using web
 ## Definition React
 
 React is an open-source JavaScript library for building user interfaces, which is now widely used by developers to build single-page applications, mobile applications, and complex web applications. React uses a **component-based architecture基于组件架构,** which means that developers can build complex user interfaces by composing smaller, reusable components.
+
+# Spectron Electron Automated Test 基于Spectron Electron的自动化测试
+
+## Definition Spectron
+
+Spectron is an open-source testing framework for **Electron applications**. It is built on top of the **popular testing framework**, WebDriverIO, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
