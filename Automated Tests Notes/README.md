@@ -175,3 +175,18 @@ Spectron is an open-source testing framework for **Electron applications**. It i
 4. Run tests
     1. `npm test`. This will execute the tests defined in the **`describe`** and **`it`** blocks in your test script.
 5. Debug and refine tests
+
+
+# Actual Problems
+
+## Statement
+
+> This might be helpful too, for a better understanding of what went wrong previously.
+> 
+
+As we are currently facing plenty of problems with automated tests, I will try to summarize everything quickly:
+
+1. The first problem we faced is the randomness of failing tests, although we found a machine that was able to run all the tests without any failure and we are trying to move the automated tests there, I think it was a little bit of luck that it passed all the tests without any random failings, although I tested the machine a lot of time. and the reason is that on my local machine, it was 100% passing, and then I was surprised that it is not always like that, and what proves my theory is that the QA is trying to run the test and they literally said that it is failing randomly. 我们面临的第一个问题是测试失败的随机性。尽管我们找到了一台机器可以在不出现任何失败的情况下运行所有的测试，我们正在尝试将自动化测试迁移到该机器上。我认为，该机器可以在没有随机失败的情况下通过所有测试，这有点幸运，尽管我已经多次测试了该机器。原因是在我的本地机器上，测试是百分百通过的，然后我惊讶地发现情况并不总是如此。证明我的理论的是，QA正在尝试运行测试，他们明确表示测试会随机失败。
+2. The second problem is that the QA requires a lot of changes in the structure of the files, not only the location, which will require changes in all the JS files and the pipelines. 第二个问题是QA需要对文件结构进行大量更改，不仅是位置，还需要对所有JS文件和管道进行更改。
+3. The third problem is the log reporting for an error is not clear at all for the QA (and sometimes for us) 日志报告不够清晰（对于我们和QA来说）
+4. The fourth problem and the most important one is that the version of Spectron and puppeteer are outdated, we are currently using Spectron V14.0.0 and puppeteer V2.1.2 although we should and must use **Spectron V19.0.0** and **puppeteer V15.1.1**, especially after the 3rd parties upgrades. 第四个问题也是最重要的问题是Spectron和Puppeteer的版本过时。我们目前使用的是Spectron V14.0.0和Puppeteer V2.1.2，尽管我们应该和必须使用Spectron V19.0.0和Puppeteer V15.1.1，尤其是在第三方更新之后。
