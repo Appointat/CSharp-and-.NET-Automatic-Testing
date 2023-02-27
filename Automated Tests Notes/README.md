@@ -84,13 +84,31 @@ React is an open-source JavaScript library for building user interfaces, which i
 
 ## Role of React
 
+## Set up with React
+
+> Definition: CI system (Continuous Integration) is the practice of merging all developers' working locals to a shared mainline, which triggers automated build and test before the merger/integration.
+> 
+
+> CD system (Continuous Delivery) can automatically deploy the built application to a production environment. This can involve deploying to a single server or multiple servers, depending on the architecture of the application. CD system depends on CI system.
+>
+
+1. Identify the components
+2. Using the Jest Library
+3. Write user stories and test cases
+4. Run the application
+    1. Choose a CI system
+    2. Configure it
+    3. Connect the repository
+    4. Configure the pipeline
+5. Monitor and Refactor
+
 # Spectron Electron Automated Test 基于Spectron Electron的自动化测试
 
 ## Definition Spectron
 
 Spectron is an open-source testing framework for **Electron applications**. It is built on top of the **popular testing framework**, WebDriverIO, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
 
-## How to use Spectron for automated tests
+## Set up Spectron for automated tests
 
 1. Install Spectron as a dependency in your project. 
 2. Set up the test framework/test runner, such as Mocha, and an assertion library, such as Chai.
