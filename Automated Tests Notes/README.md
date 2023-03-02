@@ -82,8 +82,6 @@ Electron is an open-source framework for building desktop applications using web
 
 React is an open-source JavaScript library for building user interfaces, which is now widely used by developers to build single-page applications, mobile applications, and complex web applications. React uses a **component-based architecture基于组件架构,** which means that developers can build complex user interfaces by composing smaller, reusable components.
 
-## Role of React
-
 ## Set up with React
 
 > Definition: CI system (Continuous Integration) is the practice of merging all developers' working locals to a shared mainline, which triggers automated build and test before the merger/integration.
@@ -107,6 +105,62 @@ React is an open-source JavaScript library for building user interfaces, which i
 ## Definition Spectron
 
 Spectron is an open-source testing framework for **Electron applications**. It is built on top of the **popular testing framework**, WebDriverIO, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
+
+## Set up Spectron for automated testing (method 1) [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing)]
+
+### Using the WebDriver interface
+
+> WebDriver is an open-source tool for automated testing of web apps across many browsers. It provides capabilities for navigating to web pages, user input, JavaScript execution, and more. ChromeDriver is a standalone server which implements WebDriver's wire protocol for Chromium. It is being developed by members of the Chromium and WebDriver teams.
+> 
+
+> `npm` and `yarn` are available, but here we talk about `yarn` .
+> 
+
+There are a few ways that you can set up testing using WebDriver.
+
+- **With WebdriverIO**
+    1. **Install the test runner**. Run the WebdriverIO starter toolkit in your project root directory: `npx wido --yes` 
+        - This installs all necessary packages for you and generates a `wdio.conf.js` configuration file.
+    2. **Connect WDIO to your Electron app**. Update the capabilities in your configuration file `wdio.conf.js` to point to your Electron app binary:
+        
+        ```jsx
+        export.config = {
+          // ...
+          capabilities: [{
+            browserName: 'chrome',
+            'goog:chromeOptions': {
+              binary: '/path/to/your/electron/binary', // Path to your Electron binary.
+              args: [/* cli arguments */] // Optional, perhaps 'app=' + /path/to/your/app/
+            }
+          }]
+          // ...
+        }
+        ```
+        
+    3. **Run your test**: `npx wdio run wdio.conf.js`
+- **With Selenium :** [Selenium](https://www.selenium.dev/) is a web automation framework that exposes bindings to WebDriver APIs in many languages. Their Node.js bindings are available under the `selenium-webdriver` package on NPM. [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing#with-selenium)]
+
+### **Using Playwright**
+
+> [Microsoft Playwright](https://playwright.dev/) is an end-to-end testing framework built using browser-specific remote debugging protocols, similar to the [**Puppeteer**](https://github.com/puppeteer/puppeteer) headless Node.js API but geared towards end-to-end testing. Playwright has experimental Electron support via Electron's support for the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) (CDP).
+> 
+1. **Install dependencies**
+    - You can install Playwright through your preferred Node.js package manager. The Playwright team recommends using the `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD` environment variable to avoid unnecessary browser downloads when testing an Electron app.
+        
+        ```jsx
+        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 yarn add --dev playwright
+        ```
+        
+    - Playwright also comes with its own test runner, Playwright Test, which is built for end-to-end testing. You can also install it as a dev dependency in your project:
+        
+        ```jsx
+        yarn add --dev @playwright/test
+        ```
+        
+    
+    > If you're interested in using an alternative test runner (e.g. `Jest` or `Mocha` ), check out Playwright's [Third-Party Test Runner](https://playwright.dev/docs/test-runners/) guide.
+    > 
+2. **Write your tests [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing#write-your-tests)]**
 
 ## Set up Spectron for automated tests
 
