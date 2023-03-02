@@ -70,9 +70,13 @@ public class Calculator
 }
 ```
 
-# Automated Tests for React application 针对React的自动化测试
+---
 
-# Automated Tests for React Electron Application 基于React Electron的自动化测试
+# Automated Tests for React application
+
+---
+
+# Automated Tests for React Electron Application
 
 ## Definition Electron
 
@@ -88,8 +92,7 @@ React is an open-source JavaScript library for building user interfaces, which i
 > 
 
 > CD system (Continuous Delivery) can automatically deploy the built application to a production environment. This can involve deploying to a single server or multiple servers, depending on the architecture of the application. CD system depends on CI system.
->
-
+> 
 1. Identify the components
 2. Using the Jest Library
 3. Write user stories and test cases
@@ -97,14 +100,16 @@ React is an open-source JavaScript library for building user interfaces, which i
     1. Choose a CI system
     2. Configure it
     3. Connect the repository
-    4. Configure the pipeline
+    4. Configure the pipeline (Azure DevOps)
 5. Monitor and Refactor
 
-# Spectron Electron Automated Test 基于Spectron Electron的自动化测试
+---
+
+# Spectron Electron Automated Test
 
 ## Definition Spectron
 
-Spectron is an open-source testing framework for **Electron applications**. It is built on top of the **popular testing framework**, WebDriverIO, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
+Spectron is an open-source testing framework of Electron for **building desktop applications**. It is built on top of the **popular testing framework**, WebDriver, and provides a simple and consistent API for interacting with Electron applications and testing their user interface.
 
 ## Set up Spectron for automated testing (method 1) [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing)]
 
@@ -162,6 +167,8 @@ There are a few ways that you can set up testing using WebDriver.
     > 
 2. **Write your tests [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing#write-your-tests)]**
 
+### **Using a custom test driver [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing#using-a-custom-test-driver)]**
+
 ## Set up Spectron for automated testing (method 2) [ChatGPT]
 
 To use Yarn to generate automated tests for a project in Rider, you can follow these general steps:
@@ -181,7 +188,7 @@ To use Yarn to generate automated tests for a project in Rider, you can follow t
 
 In Rider, you can use the built-in test runner to run your Yarn tests. To do this, you need to configure the test runner to use the **`yarn test`** command. You can do this by opening the "Run" menu, selecting "Edit Configurations...", and then creating a new "Yarn" configuration. In the "Yarn" configuration, set the "Script" field to "test" and the "Arguments" field to any additional arguments you want to pass to the **`yarn test`** command. Then, you can run the tests by selecting the "Yarn" configuration from the "Run" menu.
 
-## Set up Spectron for automated tests
+## Set up Spectron for automated testing (method 3) [not recommend]
 
 1. Install Spectron as a dependency in your project. 
 2. Set up the test framework/test runner, such as Mocha, and an assertion library, such as Chai.
@@ -249,6 +256,7 @@ In Rider, you can use the built-in test runner to run your Yarn tests. To do thi
     1. `npm test`. This will execute the tests defined in the **`describe`** and **`it`** blocks in your test script.
 5. Debug and refine tests
 
+---
 
 # Actual Problems
 
