@@ -162,6 +162,25 @@ There are a few ways that you can set up testing using WebDriver.
     > 
 2. **Write your tests [[link](https://www.electronjs.org/docs/latest/tutorial/automated-testing#write-your-tests)]**
 
+## Set up Spectron for automated testing (method 2) [ChatGPT]
+
+To use Yarn to generate automated tests for a project in Rider, you can follow these general steps:
+
+1. Install Yarn: If you haven't installed Yarn already, you can download it from the official website: **[https://classic.yarnpkg.com/en/docs/install](https://classic.yarnpkg.com/en/docs/install)**.
+2. Install testing dependencies: Depending on the testing framework you want to use (e.g. Jest, Mocha, etc.), you need to install the necessary dependencies. For example, if you want to use Jest, you can run the following command in the terminal:
+    
+    ```css
+    yarn add --dev jest @types/jest
+    ```
+    
+    This installs the Jest testing framework and its TypeScript typings as a development dependency.
+    
+3. Create test files: Once you have installed the testing dependencies, you can create test files for your project. For example, if you have a TypeScript project with source files in a **`src`** directory, you can create a test file **`src/index.test.ts`** that tests the code in **`src/index.ts`**.
+4. Configure Jest: Depending on your project's setup, you may need to configure Jest to work with your project. This can include configuring Jest to recognize TypeScript files or setting up Jest to use specific testing libraries or mock functions. You can configure Jest by adding a **`jest.config.js`** file to the root of your project or by adding a **`jest`** section to your **`package.json`** file.
+5. Run tests: Once you have created test files and configured Jest, you can run the tests using the **`yarn test`** command. This command runs the tests using the configuration specified in the **`jest.config.js`** or **`package.json`** file.
+
+In Rider, you can use the built-in test runner to run your Yarn tests. To do this, you need to configure the test runner to use the **`yarn test`** command. You can do this by opening the "Run" menu, selecting "Edit Configurations...", and then creating a new "Yarn" configuration. In the "Yarn" configuration, set the "Script" field to "test" and the "Arguments" field to any additional arguments you want to pass to the **`yarn test`** command. Then, you can run the tests by selecting the "Yarn" configuration from the "Run" menu.
+
 ## Set up Spectron for automated tests
 
 1. Install Spectron as a dependency in your project. 
